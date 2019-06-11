@@ -1,0 +1,52 @@
+spring:
+  profiles:
+    active: dev
+  thymeleaf:
+    mode: LEGACYHTML5
+    encoding: UTF-8
+    cache: false
+    servlet:
+      content-type: text/html
+
+hystrix:
+  stream:
+    dashboard:
+      intervalInMilliseconds: 500
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+        timeout:
+          enabled: true
+ribbon:
+  ConnectTimeout: 5000
+  ReadTimeout: 25000
+
+server:
+  session-timeout: 1800
+  tomcat:
+    basedir: /springboot-tmp
+
+sys:
+  security:
+    ignore:
+      urls:
+      - /actuator/**
+      - /css/**/*.*
+      - /img/**/*.*
+      - /js/**/*.*
+      - /fonts/**/*.*
+      - /favicon.ico
+      - /**/publicservice/**
+
+logging:
+  config: classpath:logback-spring.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        #exclude: []

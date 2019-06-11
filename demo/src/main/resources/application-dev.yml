@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: api-demo
+  security:
+    user:
+      password: password
+      name: user
+  servlet:
+    multipart:
+      max-file-size: 100MB #最大文件大小
+      max-request-size: 100MB
+
+server:
+  port: 9033
+  session-timeout: 1800
+  tomcat:
+    max-threads: 1000
+    min-spare-threads: 30
+    basedir: /springboot-tmp
+
+logging:
+  level:
+    root: info
+    org.springframework.security: info
+  path: applog
+    
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    health-check-url-path: /actuator/health
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:8761/eureka/
+
+sys:
+  security:
+    token-access:
+      appName: mgr-auth
+      clientId: bjc1
+      secret: bjc-2018
+    
